@@ -1,21 +1,41 @@
 import React from "react";
-import TaskList from "../components/TaskList";
-import { Container, Group, Box } from "@mantine/core";
+import { useSelector, useDispatch } from "react-redux";
+import { useDisclosure } from "@mantine/hooks";
+import TaskList from "../components/TaskList/TaskList";
+import DailyTasks from "../components/TaskList/DailyTasks";
+import { Container, Group, Box, Modal } from "@mantine/core";
+import { useForm } from "@mantine/form";
 import { Task } from "../types";
+import { v4 as uuidv4 } from "uuid";
+import {
+    addDaily,
+    completeDaily,
+    type RootState,
+} from "../Store";
 
 const TaskView: React.FC = () => {
-    const tasks: Task[] = [
-        { details: "Lavos Prime", done: false },
-        { details: "Cedo Prime", done: false },
-        { details: "Lose sanity", done: true },
-    ]
+    const dispatch = useDispatch();
+    const dailies = useSelector((state: RootState) => state.dailies.tasks);
+    const [opened, { open, close }] = useDisclosure(false);
+    const newTaskForm = useForm({
+        mode: "uncontrolled",
+        initialValues: {
+            details: "",
+            id: "",
+        },
+    })
+
     return (
+        <>
+        <Modal opened={opened} onClose={close} title="New Task">
+        </Modal>
         <Box>
             <Group justify="center">
-                <TaskList title="Dailies" tasks={tasks} />
-                <TaskList title="Weeklies" tasks={tasks} />
+                <DailyTasks />
+                <TaskList title="Weeklies" tasks={[]} />
             </Group>
         </Box>
+        </>
     )
 }
 

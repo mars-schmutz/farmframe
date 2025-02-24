@@ -23,6 +23,7 @@ const navData = [
 const App: React.FC = () => {
     const [opened, { toggle }] = useDisclosure();
     const [active, setActive] = useState(0);
+    const navigate = useNavigate();
 
     const navLinks = navData.map((item, idx) => (
         <NavLink
