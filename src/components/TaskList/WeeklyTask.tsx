@@ -1,29 +1,29 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import TaskList from "./TaskList";
-import { useSelector, useDispatch } from "react-redux";
 import { useDisclosure } from "@mantine/hooks";
 import { useForm } from "@mantine/form";
 import { Modal, TextInput, Button } from "@mantine/core";
 import { v4 as uuidv4 } from "uuid";
 import {
-    addDaily,
-    completeDaily,
+    addWeekly,
+    completeWeekly,
     type RootState,
 } from "../../Store";
 
-const DailyTasks = React.FC = () => {
+const WeeklyTasks = React.FC = () => {
     const dispatch = useDispatch();
-    const dailies = useSelector((state: RootState) => state.dailies.tasks);
+    const weeklies = useSelector((state: RootState) => state.weeklies.tasks);
     const [opened, { open, close }] = useDisclosure(false);
-    const newDailyForm = useForm({
+    const newWeeklyForm = useForm({
         mode: "uncontrolled",
         initialValues: {
-            details: "",
+            detaisl: "",
             id: "",
         }
     })
 
-    const saveNewDaily = (values: typeof newDailyForm.values) => {
+    const saveNewWeekly = (values: typeof newWeeklyForm.values) => {
         let { id, details } = values;
         id = uuidv4();
         const task = {
@@ -33,30 +33,30 @@ const DailyTasks = React.FC = () => {
             notes: "",
         }
 
-        dispatch(addDaily(task));
+        dispatch(addWeekly(task));
         close();
-        newDailyForm.reset();
+        newWeeklyForm.reset();
     }
 
     const handleOnCheck = (id: string) => {
-        dispatch(completeDaily(id))
+        dispatch(completeWeekly(id));
     }
 
     return (
         <>
-        <Modal opened={opened} onClose={close} title="New Daily Task">
-            <form onSubmit={newDailyForm.onSubmit(saveNewDaily)}>
+        <Modal opened={opened} onClose={close} title="New Weekly Task">
+            <form onSubmit={newWeeklyForm.onSubmit(saveNewWeekly)}>
                 <TextInput
                 label="Task"
-                key={newDailyForm.key("details")}
-                { ...newDailyForm.getInputProps("details")} />
+                key={newWeeklyForm.key("details")}
+                { ...newWeeklyForm.getInputProps("details")} />
 
                 <Button type="submit">Submit</Button>
             </form>
         </Modal>
-        <TaskList title="Dailies" tasks={dailies} newTask={open} onCheck={handleOnCheck}/>
+        <TaskList title="Weeklies" tasks={weeklies} newTask={open} onCheck={handleOnCheck} />
         </>
     )
 }
 
-export default DailyTasks;
+export default WeeklyTasks;

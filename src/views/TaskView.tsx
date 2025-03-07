@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useDisclosure } from "@mantine/hooks";
 import TaskList from "../components/TaskList/TaskList";
 import DailyTasks from "../components/TaskList/DailyTasks";
+import WeeklyTasks from "../components/TaskList/WeeklyTask";
+import TodoTasks from "../components/TaskList/TodoTasks";
 import { Container, Group, Box, Modal } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Task } from "../types";
@@ -30,9 +32,10 @@ const TaskView: React.FC = () => {
         <Modal opened={opened} onClose={close} title="New Task">
         </Modal>
         <Box>
-            <Group justify="center">
+            <Group justify="space-around">
                 <DailyTasks />
-                <TaskList title="Weeklies" tasks={[]} />
+                <WeeklyTasks />
+                <TodoTasks />
             </Group>
         </Box>
         </>
