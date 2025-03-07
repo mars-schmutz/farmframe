@@ -3,7 +3,7 @@ import {
     Title,
 } from "@mantine/core";
 
-const ArchonShards = React.FC => () {
+const ArchonShardsView: React.FC = () => {
     return (
         <>
         <Title order={3}>Archon Shards</Title>
@@ -11,4 +11,4 @@ const ArchonShards = React.FC => () {
     )
 }
 
-export default ArchonShards;
+export default ArchonShardsView;

@@ -7,7 +7,8 @@ import {
     Title
 } from "@mantine/core";
 import {
-    IconListCheck
+    IconListCheck,
+    IconDiamond
 } from "@tabler/icons-react";
 import { useDisclosure } from '@mantine/hooks';
 import { Routes, Route, useNavigate, useLocation, Navigate } from "react-router-dom";
@@ -15,9 +16,11 @@ import { routes } from "./Router";
 import { useState, useEffect } from "react";
 
 import TaskView from "./views/TaskView";
+import ArchonShardsView from "./views/ArchonShardsView";
 
 const navData = [
     { icon: IconListCheck, label: "Tasks", to: "/"},
+    { icon: IconDiamond, label: "Archon Shards", to: "/archon-shards"},
 ]
 
 const App: React.FC = () => {
