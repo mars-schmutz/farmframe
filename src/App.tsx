@@ -8,7 +8,8 @@ import {
 } from "@mantine/core";
 import {
     IconListCheck,
-    IconDiamond
+    IconDiamond,
+    IconTrendingUp
 } from "@tabler/icons-react";
 import { useDisclosure } from '@mantine/hooks';
 import { Routes, Route, useNavigate, useLocation, Navigate } from "react-router-dom";
@@ -19,8 +20,9 @@ import TaskView from "./views/TaskView";
 import ArchonShardsView from "./views/ArchonShardsView";
 
 const navData = [
-    { icon: IconListCheck, label: "Tasks", to: "/"},
-    { icon: IconDiamond, label: "Archon Shards", to: "/archon-shards"},
+    { icon: IconListCheck, label: "Tasks", to: "/" },
+    { icon: IconDiamond, label: "Archon Shards", to: "/archon-shards" },
+    { icon: IconTrendingUp, label: "WF Market", to: "/marketplace" },
 ]
 
 const App: React.FC = () => {
@@ -30,10 +32,10 @@ const App: React.FC = () => {
 
     const navLinks = navData.map((item, idx) => (
         <NavLink
-            key={ item.label }
-            active={ idx === active }
-            label={ item.label }
-            leftSection={ <item.icon size={32} stroke={1.5} /> }
+            key={item.label}
+            active={idx === active}
+            label={item.label}
+            leftSection={<item.icon size={32} stroke={1.5} />}
             onClick={() => {
                 setActive(idx)
                 navigate(item.to)
@@ -43,26 +45,26 @@ const App: React.FC = () => {
 
     return (
         <AppShell
-        header={{ height: 60 }}
-        navbar={{
-            width: 300,
-            breakpoint: "sm",
-            collapsed: { mobile: !opened }
-        }}
-        padding="md"
+            header={{ height: 60 }}
+            navbar={{
+                width: 300,
+                breakpoint: "sm",
+                collapsed: { mobile: !opened }
+            }}
+            padding="md"
         >
             <AppShell.Header>
                 <Burger
-                opened={ opened }
-                onClick={ toggle }
-                hiddenFrom="sm"
-                size="sm"
+                    opened={opened}
+                    onClick={toggle}
+                    hiddenFrom="sm"
+                    size="sm"
                 />
                 <Title>Farmframe</Title>
             </AppShell.Header>
 
             <AppShell.Navbar p="md">
-                <Box>{ navLinks }</Box>
+                <Box>{navLinks}</Box>
             </AppShell.Navbar>
 
             <AppShell.Main>
