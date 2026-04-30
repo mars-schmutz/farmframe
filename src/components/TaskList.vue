@@ -4,7 +4,6 @@ import type { Task } from "../types";
 
 defineProps<{
   tasks: Task[];
-  // When true, toggling "done" removes the task instead (for the one-off todo list).
   removeOnComplete?: boolean;
 }>();
 

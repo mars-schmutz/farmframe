@@ -94,7 +94,6 @@ export const useMarket = defineStore("market", () => {
       const before = orders.value[slug]?.at ?? 0;
       await refresh(slug);
       const after = orders.value[slug]?.at ?? 0;
-      // Only rate-limit when we actually hit the network; cache hits are free.
       if (after > before) {
         await new Promise((r) => setTimeout(r, 300));
       }
@@ -104,7 +103,6 @@ export const useMarket = defineStore("market", () => {
   function lowestSellOrders(slug: string, limit = 10): Order[] {
     const entry = orders.value[slug];
     if (!entry) return [];
-    // The /top endpoint pre-filters to online sellers and sorts by platinum asc.
     return entry.data.slice(0, limit);
   }
 

@@ -5,7 +5,6 @@ import type { ArchonShard, ShardColor } from "../types";
 const MAX_SHARDS = 5;
 
 export const useShards = defineStore("shards", () => {
-  // Keyed by frame name. Missing entries are treated as empty.
   const shards = ref<Record<string, ArchonShard[]>>({});
 
   function get(frame: string): ArchonShard[] {

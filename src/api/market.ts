@@ -73,7 +73,6 @@ interface RawCatalogItem {
 
 function thumbUrl(path?: string): string {
   if (!path) return "";
-  // v2 thumb/icon fields are relative paths served from the API static root.
   return `${STATIC_BASE}/static/assets/${path}`;
 }
 
@@ -100,7 +99,6 @@ export async function getTopOrders(slug: string): Promise<Order[]> {
 }
 
 export async function getStatistics(slug: string): Promise<StatPoint[]> {
-  // v1 statistics endpoint still works and is the only price-history source.
   const res = await fetchJson<{
     payload: { statistics_closed: { "90days": StatPoint[] } };
   }>(`/v1/items/${slug}/statistics`);

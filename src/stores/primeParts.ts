@@ -37,9 +37,7 @@ export const usePrimeParts = defineStore("primeParts", () => {
     return m;
   });
 
-  // Reverse index: every relic that drops any prime part, with the parts it
-  // drops. Forma BP common drops aren't represented in the source data, so
-  // they won't appear here — acceptable, since Forma isn't a pinnable part.
+  // Forma BP isn't in source data and won't appear here — acceptable since Forma isn't a pinnable part.
   const relics = computed<RelicEntry[]>(() => {
     const m = new Map<string, RelicEntry>();
     for (const p of parts) {
@@ -52,7 +50,6 @@ export const usePrimeParts = defineStore("primeParts", () => {
         r.drops.push({ partId: p.id, rarity: d.rarity });
       }
     }
-    // Sort drops within each relic by rarity (Rare → Uncommon → Common).
     const rarityRank: Record<string, number> = { Rare: 0, Uncommon: 1, Common: 2 };
     for (const r of m.values()) {
       r.drops.sort((a, b) => (rarityRank[a.rarity] ?? 99) - (rarityRank[b.rarity] ?? 99));

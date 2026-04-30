@@ -1,4 +1,3 @@
-// Canonical list of base Warframes with icon URLs served by wiki.warframe.com.
 // Special:FilePath handles redirects and URL-encoding, so hyphens/spaces are safe.
 
 export interface FrameInfo {
