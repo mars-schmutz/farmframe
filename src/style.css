@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+/* Orokin gold on deep void. Surfaces carry a faint blue tint so the warm
+ * gold accent reads cleanly against them; rarity colors (bronze/silver/gold)
+ * used elsewhere remain compatible. */
+@theme {
+  --color-surface: #07080d;
+  --color-surface-raised: #10131c;
+  --color-surface-muted: #1a1e2a;
+  --color-border: #2a2f42;
+  --color-accent: #e6b458;
+  --color-accent-muted: rgba(230, 180, 88, 0.14);
+}
+
+html, body, #app {
+  min-height: 100svh;
+  background: var(--color-surface);
+  color: #e8e6df;
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+body { margin: 0; }
