@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import { markRaw, type Component } from "vue";
 import DailiesView from "./views/DailiesView.vue";
 import WeekliesView from "./views/WeekliesView.vue";
@@ -31,7 +31,7 @@ export const navItems: NavItem[] = [
 ];
 
 export const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: [
     { path: "/", component: DailiesView },
     { path: "/weeklies", component: WeekliesView },
