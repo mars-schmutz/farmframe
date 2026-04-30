@@ -4,7 +4,7 @@ import DailiesView from "./views/DailiesView.vue";
 import WeekliesView from "./views/WeekliesView.vue";
 import TodosView from "./views/TodosView.vue";
 import ShardsView from "./views/ShardsView.vue";
-import MarketView from "./views/MarketView.vue";
+// import MarketView from "./views/MarketView.vue";
 import GuidesView from "./views/GuidesView.vue";
 import IconSun from "./components/icons/IconSun.vue";
 import IconCalendar from "./components/icons/IconCalendar.vue";
@@ -37,9 +37,12 @@ export const router = createRouter({
     { path: "/weeklies", component: WeekliesView },
     { path: "/todos", component: TodosView },
     { path: "/shards", component: ShardsView },
-    // Lazy-loaded: keeps the ~360KB prime parts JSON out of the main bundle.
-    { path: "/prime-parts", component: () => import("./views/PrimePartsView.vue") },
-    { path: "/market", component: MarketView },
+    // Lazy-loaded: keeps the prime parts JSON out of the main bundle.
+    {
+      path: "/prime-parts",
+      component: () => import("./views/PrimePartsView.vue"),
+    },
+    // { path: "/market", component: MarketView },
     { path: "/guides", component: GuidesView },
   ],
 });

@@ -1,15 +1,10 @@
-// Thin typed client over the public warframe.market API.
-// Uses v2 for catalog + orders (the /top endpoint returns pre-filtered
-// online sellers) and v1 for price statistics (v2 has no stats endpoint yet).
+// disable warframe.market calls
+export const MARKET_API_ENABLED = false;
 
-// API JSON endpoints are proxied (see vite.config.ts `/market-api`) because
-// api.warframe.market does not return Access-Control-Allow-Origin.
 // Override via VITE_MARKET_API_BASE for production deployments that have
 // their own proxy in front.
 const BASE = import.meta.env.VITE_MARKET_API_BASE ?? "/market-api";
 
-// Image thumbs load fine cross-origin via <img>, so we hit the API host
-// directly without going through the proxy.
 const STATIC_BASE = "https://api.warframe.market";
 
 const PLATFORM = "pc";
@@ -23,7 +18,8 @@ export interface CatalogItem {
   id: string;
   slug: string;
   name: string;
-  thumb: string; // full URL
+  // full url
+  thumb: string;
 }
 
 export type OrderStatus = "ingame" | "online" | "offline";
@@ -77,6 +73,7 @@ function thumbUrl(path?: string): string {
 }
 
 export async function getItems(): Promise<CatalogItem[]> {
+  if (!MARKET_API_ENABLED) return [];
   const res = await fetchJson<V2Response<RawCatalogItem[]>>("/v2/items");
   return res.data.map((it) => ({
     id: it.id,
@@ -92,6 +89,7 @@ interface RawTopOrders {
 }
 
 export async function getTopOrders(slug: string): Promise<Order[]> {
+  if (!MARKET_API_ENABLED) return [];
   const res = await fetchJson<V2Response<RawTopOrders>>(
     `/v2/orders/item/${slug}/top?platform=${PLATFORM}`,
   );
@@ -99,6 +97,7 @@ export async function getTopOrders(slug: string): Promise<Order[]> {
 }
 
 export async function getStatistics(slug: string): Promise<StatPoint[]> {
+  if (!MARKET_API_ENABLED) return [];
   const res = await fetchJson<{
     payload: { statistics_closed: { "90days": StatPoint[] } };
   }>(`/v1/items/${slug}/statistics`);
